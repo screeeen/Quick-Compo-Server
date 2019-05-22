@@ -78,6 +78,7 @@ app.use('/api', playerRouter);
 app.use('/api', gameRouter);
 // app.use('/users', usersRouter);
 
+app.use('/auth', auth);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
