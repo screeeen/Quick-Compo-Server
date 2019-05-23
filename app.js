@@ -19,16 +19,14 @@ var gameRouter = require('./routes/game-routes');
 // var usersRouter = require('./routes/users');
 
 
-
-
 mongoose
   .connect(process.env.MONGODB_URI, {
     keepAlive: true,
     useNewUrlParser: true,
     reconnectTries: Number.MAX_VALUE,
   })
-  .then(() => {
-    console.log(`Connected to database`);
+  .then((x) => {
+    console.log(`Connected to database "${x.connections[0].name}"`);
   })
   .catch(error => {
     console.error(error);

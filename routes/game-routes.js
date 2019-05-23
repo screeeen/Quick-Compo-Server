@@ -68,39 +68,58 @@ router.post('/games/add-game', (req, res) => {
             .status(500)
             .json(err)
         })
-  })
+    })
 })
 
 // POST '/games/add-all-games'		 => to create a tournament
 router.post('/games/add-all-games', (req, res) => {
+  const { tournamentId , players } = req.body; // warning: players faked below thru robin
 
-  // let games = robin(6);
+  //check if players.lenght is pow 2
 
-  const { player1, player2, img, winner, tournamentId } = req.body;
-  console.log(img, player1, player2, winner, tournamentId, 'joer');
-  
-  Promise.all(games)
-  .then(
-  Game.create({
-    player1,
-    player2,
-    winner,
-    img,
+  let rounds = robin(players.length, [...players] );
+  let games = [];
+  rounds.forEach((round, i) => {
+    games.push(...round);
   })
-    .then((newGame) => {
-      Tournament.findByIdAndUpdate(tournamentId, { $push: { games: newGame._id } }, { new: true })
-        .then((aResponse) => {
+
+  let gamePromises = games.map((game) => {
+
+    return Game.create({
+      player1: game[0], //player 1
+      player2: game[1], //player 2
+      winner: -1 // result not played yet
+    })
+  })
+
+  Promise.all(gamePromises)
+    .then((createdGamesIntoTheDatabase) => {
+      console.log(createdGamesIntoTheDatabase);
+
+      const arrayOfIds = createdGamesIntoTheDatabase.map((oneGame) => {
+        return oneGame._id;
+      })
+
+      Tournament.findByIdAndUpdate(tournamentId, { $set: { games: arrayOfIds } }, { new: true })
+        .then((updatedTournamentInDB) => {
           res
             .status(201)
-            .json(aResponse);
+            .json(updatedTournamentInDB)
         })
         .catch((err) => {
           res
             .status(500)
             .json(err)
         })
-  }))
+        .catch((err) => {
+          res
+            .status(500)
+            .json(err)
+        })
+    })
 })
+
+
 
 
 
