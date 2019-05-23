@@ -10,6 +10,6 @@ const playerSchema = new Schema({
 })
 
 
-const Player = mongoose.model('player', playerSchema);
+const Player = mongoose.model('Player', playerSchema);
 
 module.exports = Player;

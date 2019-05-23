@@ -14,7 +14,7 @@ const robin = require('roundrobin');
 /* GET home page. */
 router.get('/games', function (req, res, next) {
 
-  Game.find().populate('player')
+  Game.find().populate('player1').populate('player2')
     .then((allGames) => {
       res
         .json(allGames)

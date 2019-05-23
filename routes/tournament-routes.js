@@ -3,10 +3,11 @@ const mongoose = require('mongoose');
 var router = express.Router();
 
 const Tournament = require('../models/tournament-model')
+const Player = require('../models/player-model')
 
 /* GET home page. */
 router.get('/tournaments', function (req, res, next) {
-  Tournament.find().populate('player', 'game')
+  Tournament.find().populate('players').populate('games')
     .then((allTournaments) => {
       res
         .json(allTournaments)

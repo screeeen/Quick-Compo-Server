@@ -38,7 +38,7 @@ router.post('/players/add-player', (req, res) => {
 
 // GET '/players'		 => to get all the players
 router.get('/players', (req, res, next) => {
-  Player.find().populate('tournaments')
+  Player.find().populate('tournament')
     .then(allThePlayers => {
       res.json(allThePlayers);
     })
@@ -59,7 +59,7 @@ router.get('/players/:id', (req, res) => {
     return;
   }
 
-  Player.findById(id).populate('tournaments')
+  Player.findById(id).populate('tournament')
     .then((foundPlayer) => {
       res.status(200).json(foundPlayer);
     })
