@@ -9,25 +9,27 @@ const Tournament = require('../models/tournament-model');
 
 // POST '/players'
 router.post('/players/add-player', (req, res) => {
-  const { name, img, position, score, tournamentId } = req.body;
-
+  const { name, img, position, score, tournament } = req.body;
+  console.log('llega hasta aqui?',name,img,position,score,tournament);
   Player.create({
     name,
     img,
     position,
     score,
-    tournament: tournamentId
+    tournament
   })
-    .then((newPlayer) => {
-      Tournament.findByIdAndUpdate(tournamentId, { $push: { players: newPlayer._id }},{new:true})
-      .then((aResponse) => {
-        res
-        .status(201)
-        .json(aResponse);
-      })
-      .catch(err => {
-        res.status(500).json(err);
-      })
+  .then((newPlayer) => {
+    console.log('newFucker ', newPlayer);
+      Tournament.findByIdAndUpdate(tournament, { $push: { players: newPlayer._id } }, { new: true })
+        .then((aResponse) => {
+          console.log('aResponse',aResponse);
+          res
+            .status(201)
+            .json(aResponse);
+        })
+        .catch(err => {
+          res.status(500).json(err);
+        })
     })
     .catch((err) => {
       res
@@ -41,6 +43,19 @@ router.get('/players', (req, res, next) => {
   Player.find().populate('tournament')
     .then(allThePlayers => {
       res.json(allThePlayers);
+    })
+    .catch(err => {
+      res.json(err);
+    })
+});
+
+// GET '/players/intoTournament/:id'		 => to get all the players
+router.get('/players/intoTournament/:id', (req, res, next) => {
+  const { id } = req.params
+  Tournament.findById(id).populate('players')
+    .then(oneTournamentWithPlayers => {
+      console.log('get players into tournament ',oneTournamentWithPlayers);
+      res.json(oneTournamentWithPlayers);
     })
     .catch(err => {
       res.json(err);
@@ -77,16 +92,16 @@ router.put('/players/:id', (req, res, next) => {
     res.status(400).json({ message: 'Specified id is not valid' });
     return;
   }
-  
-console.log(req.params)
-  Player.findByIdAndUpdate(req.params.id, req.body, {new: true})
+
+  console.log(req.params)
+  Player.findByIdAndUpdate(req.params.id, req.body, { new: true })
     .then((updatedPlayer) => {
       res
-      .json(200, {updatedPlayer,  message: `Project with ${req.params.id} is updated successfully.` });
+        .json(200, { updatedPlayer, message: `Project with ${req.params.id} is updated successfully.` });
     })
     .catch(err => {
       res
-      .json(err);
+        .json(err);
     })
 })
 
