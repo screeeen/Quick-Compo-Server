@@ -1,6 +1,8 @@
 var express = require('express');
 const mongoose = require('mongoose');
 var router = express.Router();
+const parser = require('./../config/cloudinary');
+
 
 const Tournament = require('../models/tournament-model')
 const Player = require('../models/player-model')
@@ -58,10 +60,18 @@ router.put('/tournaments/:id', (req, res, next) => {
 
 // POST '/tournaments/add-tournament'		 => to create a tournament
 router.post('/tournaments/add-tournament', (req, res) => {
-  const { name, img } = req.body;
+  const { name, img, players, games } = req.body;
+
+  // console.log(req.file.secure_url);
+  // const img = req.file.secure_url;
+  // console.log('image', img);
+  console.log('image', img);
+
   Tournament.create({
     name,
-    img
+    img,
+    players,
+    games
   })
     .then((response) => {
       res
@@ -74,6 +84,19 @@ router.post('/tournaments/add-tournament', (req, res) => {
         .json(err)
     })
 })
+
+
+// POST '/tournaments/upload-image'		 => to create a tournament
+router.post('/tournaments/upload-image', parser.single('photo'), (req, res, next) => {
+  console.log('file upload');
+  if (!req.file) {
+    next(new Error('No file uploaded!'));
+  };
+  const imageUrl = req.file.secure_url;
+  console.log("imageUrl -->  " + imageUrl);
+  res.json(imageUrl).status(200);
+});
+
 
 // PUT '/tournaments/:id' 		=> to update a specific project
 router.put('/tournaments/edit/:id', (req, res, next) => {
