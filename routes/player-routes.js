@@ -10,33 +10,24 @@ const Tournament = require('../models/tournament-model');
 // POST '/players'
 router.post('/players/add-player', (req, res) => {
   const { name, img, position, score, tournament } = req.body;
-  console.log('llega hasta aqui?',name,img,position,score,tournament);
-  Player.create({
-    name,
-    img,
-    position,
-    score,
-    tournament
-  })
-  .then((newPlayer) => {
-    console.log('newFucker ', newPlayer);
-      Tournament.findByIdAndUpdate(tournament, { $push: { players: newPlayer._id } }, { new: true })
-        .then((aResponse) => {
-          console.log('aResponse',aResponse);
-          res
-            .status(201)
-            .json(aResponse);
-        })
-        .catch(err => {
-          res.status(500).json(err);
-        })
+
+  let newPlayer = new Player({name, img, position, score})
+  
+  const updateTournament = Tournament.findByIdAndUpdate(tournament, { $push: { players: newPlayer._id } }, { new: true });
+  const savePlayer = newPlayer.save()
+
+  Promise.all([updateTournament, savePlayer])
+      .then((newPlayer) => {
+        console.log("adding new player here", newPlayer)
+            res
+              .status(201)
+              .json(newPlayer);
+          })
+          .catch(err => {
+            res.status(500).json(err);
+          })
     })
-    .catch((err) => {
-      res
-        .status(500)  // Internal Server Error
-        .json(err)
-    })
-})
+
 
 // GET '/players'		 => to get all the players
 router.get('/players', (req, res, next) => {

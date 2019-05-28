@@ -75,8 +75,13 @@ app.use('/api', tournamentRouter);
 app.use('/api', playerRouter);
 app.use('/api', gameRouter);
 // app.use('/users', usersRouter);
-
 app.use('/auth', auth);
+
+//REACT APP index.html
+app.use((req,res,next)=>{
+  //If no routes match, send them the React HTML.
+  res.sendFile(__dirname + "/public/index.html");
+});
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
