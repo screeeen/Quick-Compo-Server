@@ -40,15 +40,16 @@ router.get('/tournaments/:id', function (req, res, next) {
 });
 
 
-// PUT '/tournaments/:id' 		=> to update a specific project
-router.put('/tournaments/:id', (req, res, next) => {
+// PUT '/tournaments/:id' 		=> to update a specific Tournament
+router.put('/tournaments/edit/:id', (req, res, next) => {
 
   if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
     res.status(400).json({ message: 'Specified id is not valid' });
     return;
   }
-
-  Project.findByIdAndUpdate(req.params.id, req.body)
+  console.log('hola',req.params.id, req.body);
+  
+  Tournament.findByIdAndUpdate(req.params.id, req.body)
     .then(() => {
       res.json({ message: `Tournament with ${req.params.id} is updated successfully.` });
     })
@@ -97,25 +98,6 @@ router.post('/tournaments/upload-image', parser.single('photo'), (req, res, next
   console.log("imageUrl -->  " + imageUrl);
   res.json(imageUrl).status(200);
 });
-
-
-// PUT '/tournaments/:id' 		=> to update a specific project
-router.put('/tournaments/edit/:id', (req, res, next) => {
-
-  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-    res.status(400).json({ message: 'Specified id is not valid' });
-    return;
-  }
-
-  Project.findByIdAndUpdate(req.params.id, req.body)
-    .then(() => {
-      res.json({ message: `Tournament with ${req.params.id} is updated successfully.` });
-    })
-    .catch(err => {
-      res.json(err);
-    })
-})
-
 
 
 // DELETE '/tournaments/add-tournament'		 => to create a tournament

@@ -37,7 +37,7 @@ const app = express();
 app.use(
   cors({
     credentials: true,
-    origin: [process.env.PUBLIC_DOMAIN]//'https://quick-compo.herokuapp.com/'
+    origin: [process.env.PUBLIC_DOMAIN,'https://quick-compo.herokuapp.com/']//
   }),
 );
 // app.use((req, res, next) => {
