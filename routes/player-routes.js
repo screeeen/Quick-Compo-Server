@@ -9,24 +9,30 @@ const Tournament = require('../models/tournament-model');
 
 // POST '/players'
 router.post('/players/add-player', (req, res) => {
-  const { name, img, position, score, tournament } = req.body;
+  const { name, img, position, score, tournamentId } = req.body;
+console.log('tournament in body?',tournamentId);
 
-  let newPlayer = new Player({name, img, position, score})
-  
-  const updateTournament = Tournament.findByIdAndUpdate(tournament, { $push: { players: newPlayer._id } }, { new: true });
-  const savePlayer = newPlayer.save()
+  let newPlayer = new Player({ name, img, position, score })
 
-  Promise.all([updateTournament, savePlayer])
-      .then((newPlayer) => {
-        console.log("adding new player here", newPlayer)
-            res
-              .status(201)
-              .json(newPlayer);
-          })
-          .catch(err => {
-            res.status(500).json(err);
-          })
+  newPlayer.save()
+    .then((newPlayerDoc) => {
+      Tournament.findByIdAndUpdate(tournamentId, { $push: { players: newPlayerDoc._id } }, { new: true })
+        .then((updatedTournament) => {
+          console.log('updated tournament',updatedTournament);
+          
+          res
+            .status(201)
+            .json(newPlayerDoc);
+        })
+        .catch(err => {
+          res.status(500).json(err);
+        })
     })
+    .catch(err => {
+      res.status(500).json(err);
+    })
+})
+
 
 
 // GET '/players'		 => to get all the players
@@ -45,7 +51,7 @@ router.get('/players/intoTournament/:id', (req, res, next) => {
   const { id } = req.params
   Tournament.findById(id).populate('players')
     .then(oneTournamentWithPlayers => {
-      console.log('get players into tournament ',oneTournamentWithPlayers);
+      console.log('get players into tournament ', oneTournamentWithPlayers);
       res.json(oneTournamentWithPlayers);
     })
     .catch(err => {
