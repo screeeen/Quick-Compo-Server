@@ -25,7 +25,7 @@ router.get('/tournaments', function (req, res, next) {
 /* GET '/tournaments/:id. => pick one tournament*/
 router.get('/tournaments/:id', function (req, res, next) {
   const { id } = req.params;
-
+  console.log(id);
   Tournament.findById(id).populate('player', 'game')
     .then((foundTournament) => {
       res
