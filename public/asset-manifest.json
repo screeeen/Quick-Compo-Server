@@ -1,0 +1,18 @@
+{
+  "main.js": "/static/js/main.6adbb92e.chunk.js",
+  "main.js.map": "/static/js/main.6adbb92e.chunk.js.map",
+  "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
+  "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
+  "static/js/2.f0083912.chunk.js": "/static/js/2.f0083912.chunk.js",
+  "static/js/2.f0083912.chunk.js.map": "/static/js/2.f0083912.chunk.js.map",
+  "index.html": "/index.html",
+  "precache-manifest.746fb597811d6071ac9def34281c299f.js": "/precache-manifest.746fb597811d6071ac9def34281c299f.js",
+  "service-worker.js": "/service-worker.js",
+  "static/media/anim.gif": "/static/media/anim.509f6c2d.gif",
+  "static/media/back.svg": "/static/media/back.c7f74c8c.svg",
+  "static/media/badge.svg": "/static/media/badge.40b071d3.svg",
+  "static/media/basket.svg": "/static/media/basket.a6ac849a.svg",
+  "static/media/court.gif": "/static/media/court.e778dbef.gif",
+  "static/media/pitch.svg": "/static/media/pitch.6177bc18.svg",
+  "static/media/user.svg": "/static/media/user.31354796.svg"
+}

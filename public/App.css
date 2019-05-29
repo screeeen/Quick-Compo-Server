@@ -1,0 +1,267 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:100&display=swap');
+
+.html {
+  margin: 12vh;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+}
+
+.container {
+  font-family: 'Raleway', sans-serif;
+  background-color: #002fa7;
+  color: whitesmoke;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.splashImg {
+  background-color: white;
+}
+
+.splashImg img {
+  margin-top: 10vh;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+form {
+  width: 90%;
+  text-align: center;
+  border-radius: 5px;
+  border-color: whitesmoke;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+label {
+  margin: 10px;
+}
+
+.tournament-image {
+  width: 30vw;
+  margin: 10vw;
+}
+
+.tournament-image-small {
+  width: 10vw;
+  margin: 2vw;
+}
+
+.tournament-tally {
+  height: 10vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex: 0;
+}
+
+input[type='text'],
+input[type='file'],
+input[type='password'],
+input[type='submit'],
+input[class='button']  {
+  font-size: 1em;
+  color: white;
+  background: #002070;
+  padding: 16px;
+  border-radius: 5px;
+  margin: 10px;
+  width: 50%;
+  height: 6vh;
+}
+
+h1 {
+  font-size: 3em;
+  text-align: center;
+  font-weight: bolder;
+  line-height: 1em;
+}
+
+h2 {
+  font-size: 1.4em;
+  margin: 6%;
+  font-weight: bolder;
+  text-align: center;
+}
+
+a {
+  color: whitesmoke;
+  text-decoration: none;
+  font-size: 1.3em;
+}
+
+input {
+  color: white;
+  border: none;
+}
+
+button {
+  width: 90%;
+  height: 10vh;
+  border-color: #002070;
+  background-color: #002070;
+  border-radius: 5px;
+  box-sizing: content-box;
+  margin: 20px;
+}
+
+.nav-bar {
+  background-color: whitesmoke;
+  color: black;
+  height: 12vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: unset;
+  width: 100%;
+}
+
+.userDiv {
+  display: flex;
+  flex-direction: row;
+}
+
+.userPic {
+  height: 80%;
+  margin: 10px -10px 0 0;
+}
+
+.nav-bar img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.nav-bar p {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin: 10px;
+}
+
+.nav-bar button.back-button {
+  /* text-align: left; */
+  width: 20%;
+  vertical-align: center;
+  border: none;
+  background-color: #00207000;
+  margin: 0;
+}
+
+.nav-bar button img {
+  height: 70px;
+  width: 70px;
+  margin: 10px;
+}
+
+.pageTitle {
+  font-size: 1.3em;
+  font-weight: 400;
+}
+
+.tournament-form{
+  height: 100vh;
+  width: 100vw;
+  margin-top: 14vh;
+  margin-bottom: -14vh;
+
+}
+
+.tournamentList {
+  margin: 12vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin: auto 0;
+  overflow: scroll;
+}
+
+.tournament-cell {
+  width: 100vw;
+  height: 10vh;
+  border-bottom: 1px solid whitesmoke;
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.game-cell {
+  width: 100vw;
+  height: 10vh;
+  border-bottom: 1px solid whitesmoke;
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.tournament-cell p {
+  font-weight: bold;
+  margin: 0 20px;
+  font-size: 1em;
+  text-align: left;
+  padding: 15px;
+}
+
+.tournament-cell p.tournament-name {
+  font-weight: bold;
+  margin: 20px;
+  font-size: 1.4em;
+  font-weight: bold;
+  text-align: left;
+  margin: 5px;
+  padding: 15px;
+}
+
+.tournament-cell img {
+  max-width: 80%;
+  max-height: 80%;
+  margin: 5px;
+  padding: 10px;
+  border-right: 1px solid whitesmoke;
+}
+
+.footer {
+  background-color: whitesmoke;
+  color: black;
+  height: -12vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  /* z-index: -1; */
+}
+
+.footer-button {
+  height: -12vh;
+  background-color: whitesmoke;
+  margin: 5px;
+  align-self: center;
+  justify-content: center;
+  /* border-right-color: 1px solid #002070; */
+}
+
+.footer-button img {
+  max-width: 20%;
+  max-height: 20%;
+  margin: 10px auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  /* border-right-color: 1px solid #002070; */
+
+}
