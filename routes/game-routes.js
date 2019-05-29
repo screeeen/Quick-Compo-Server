@@ -79,45 +79,52 @@ router.post('/games/add-all-games', (req, res) => {
 
   let rounds = robin(players.length, [...players] );
   let games = [];
+
   rounds.forEach((round, i) => {
     games.push(...round);
   })
 
-  let gamePromises = games.map((game) => {
+  let gamePromises = games.map((players) => {
 
     return Game.create({
-      player1: game[0], //player 1
-      player2: game[1], //player 2
-      winner: -1 // result not played yet
+      player1: players[0]._id, //player 1
+      player2: players[1]._id, //player 2
+      winner: -1, // result not played yet
+      img: ""
     })
   })
 
   Promise.all(gamePromises)
-    .then((createdGamesIntoTheDatabase) => {
-      console.log(createdGamesIntoTheDatabase);
-
-      const arrayOfIds = createdGamesIntoTheDatabase.map((oneGame) => {
+    .then((createdGames) => {
+      
+      const arrayOfIds = createdGames.map((oneGame) => {
         return oneGame._id;
       })
-
+      
       Tournament.findByIdAndUpdate(tournamentId, { $set: { games: arrayOfIds } }, { new: true })
-        .then((updatedTournamentInDB) => {
-          res
-            .status(201)
-            .json(updatedTournamentInDB)
+      .then((updatedTournamentInDB) => {
+        Tournament.findById(updatedTournamentInDB._id)
+        .populate({path: "games", populate: {path: "player1 player2"}})
+        .populate("players")
+        .then((populatedTournament) => {
+            console.log('populatedTournament :',populatedTournament);
+            res
+              .status(201)
+              .json(populatedTournament)
+          })
+          .catch((err) => {
+            res
+              .status(500)
+              .json(err)
         })
-        .catch((err) => {
-          res
-            .status(500)
-            .json(err)
-        })
-        .catch((err) => {
-          res
-            .status(500)
-            .json(err)
-        })
-    })
-})
+      })
+      .catch((err) => {
+        res
+          .status(500)
+          .json(err)
+      })
+      })
+    }) 
 
 
 
