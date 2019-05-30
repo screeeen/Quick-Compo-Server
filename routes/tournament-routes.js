@@ -50,8 +50,9 @@ router.put('/tournaments/edit/:id', (req, res, next) => {
   console.log('hola',req.params.id, req.body);
   
   Tournament.findByIdAndUpdate(req.params.id, req.body)
-    .then(() => {
-      res.json({ message: `Tournament with ${req.params.id} is updated successfully.` });
+    .then(() => { 
+      res
+      .json({ message: `Tournament with ${req.params.id} is updated successfully.` })
     })
     .catch(err => {
       res.json(err);

@@ -5,7 +5,7 @@ const playerSchema = new Schema({
   name: String,
   img: String,
   position: Number,
-  score: [],
+  score: Number,
   tournament: {type:Schema.Types.ObjectId,ref:'Tournament'}
 })
 

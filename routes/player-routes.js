@@ -93,8 +93,9 @@ router.put('/players/:id', (req, res, next) => {
   console.log(req.params)
   Player.findByIdAndUpdate(req.params.id, req.body, { new: true })
     .then((updatedPlayer) => {
+      console.log(updatedPlayer);
       res
-        .json(200, { updatedPlayer, message: `Project with ${req.params.id} is updated successfully.` });
+        .json(200, { updatedPlayer, message: `player with ${req.params.id} is updated successfully.` });
     })
     .catch(err => {
       res
