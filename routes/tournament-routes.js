@@ -101,7 +101,7 @@ router.post('/tournaments/upload-image', parser.single('photo'), (req, res, next
 });
 
 
-// DELETE '/tournaments/add-tournament'		 => to create a tournament
+// DELETE '/tournaments/delete-tournament'		 => to create a tournament
 router.delete('/tournaments/delete/:id', (req, res) => {
   const { id } = req.params;
 

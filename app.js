@@ -75,7 +75,7 @@ app.use('/api', tournamentRouter);
 app.use('/api', playerRouter);
 app.use('/api', gameRouter);
 // app.use('/users', usersRouter);
-app.use('/auth', auth);
+// app.use('/auth', auth);
 
 //REACT APP index.html
 app.use((req,res,next)=>{
