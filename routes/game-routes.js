@@ -148,6 +148,23 @@ router.put('/games/edit/:id', (req, res, next) => {
 })
 
 
+// DELETE '/games/delete/:id' 		=> to update a specific project
+router.delete('/games/delete/:id', (req, res, next) => {
+
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    res.status(400).json({ message: 'Specified id is not valid' });
+    return;
+  }
+
+  Game.findByIdAndDelete(req.params.id, req.body)
+    .then(() => {
+      res.json({ message: `Game with ${req.params.id} is deleted successfully.` });
+    })
+    .catch(err => {
+      res.json(err);
+    })
+})
+
 
 
 
