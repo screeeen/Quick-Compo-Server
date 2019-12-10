@@ -1,0 +1,26 @@
+
+.button {
+  height: 6vh;
+  width: 50%;
+  border: none;
+  box-shadow: 2px 2px teal;
+  text-shadow: 1px 1px teal;
+  border-radius: 30px;
+  margin: 10px auto;
+  font-size: 12px;
+  background-color: rgb(161, 165, 240);
+  color: whitesmoke;
+  
+}
+
+.red-bg {
+  background-color: red !important;
+}
+
+.button:hover {
+  background: #2c2c54;
+}
+
+.button:active {
+  transform: translateY(-4px);
+}

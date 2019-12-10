@@ -1,0 +1,30 @@
+h1 {
+  font-size: 3wv;
+  text-align: center;
+  font-weight: bolder;
+  color: white;
+}
+
+h2 {
+  font-size: 3wv;
+  font-weight: bolder;
+  text-align: center;
+  color: white;
+}
+
+a {
+  text-decoration: none;
+  font-size: 1.3em;
+  margin: 0 auto;
+  text-align: center;
+  color: whitesmoke;
+}
+
+p {
+  text-decoration: none;
+  font-size: 16px;
+  margin: 0 auto;
+  text-align: center;
+  color: rgb(197, 197, 197);
+  text-shadow: 4px solid black;
+}
